@@ -403,7 +403,7 @@
     .value-card p {
       position: relative;
       color: hsl(var(--muted-foreground));
-      font-size: 0.9375rem;
+      font-size: 1rem;
       line-height: 1.7;
     }
 
@@ -574,7 +574,7 @@
 
     .rule-description p {
       color: hsl(var(--muted-foreground));
-      font-size: 0.9375rem;
+      font-size: 1rem;
       line-height: 1.7;
     }
 
@@ -1040,14 +1040,25 @@
   </footer>
 
   <script>
+    // Accordion toggle
     function toggleRule(button) {
       const item = button.parentElement;
       const isOpen = item.classList.contains('open');
+      
+      // Close all items
       document.querySelectorAll('.rule-item').forEach(el => el.classList.remove('open'));
+      
+      // Toggle current item
       if (!isOpen) {
         item.classList.add('open');
       }
     }
+
+    // Scroll animation observer
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1055,8 +1066,9 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, observerOptions);
 
+    // Observe value cards and rules card
     document.querySelectorAll('.value-card, .rules-card').forEach(el => {
       observer.observe(el);
     });
