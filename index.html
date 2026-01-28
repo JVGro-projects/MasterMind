@@ -27,6 +27,7 @@
       --accent: 35 90% 55%;
       --accent-foreground: 45 40% 98%;
       --border: 45 20% 85%;
+      --destructive: 0 84% 60%;
       --radius: 1rem;
     }
 
@@ -52,6 +53,125 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
+    }
+
+    /* Password Gate */
+    .password-gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--background)), hsl(var(--secondary) / 0.3));
+    }
+
+    .password-card {
+      width: 100%;
+      max-width: 400px;
+      background: hsl(var(--card) / 0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid hsl(var(--border) / 0.5);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px hsl(0 0% 0% / 0.1);
+    }
+
+    .password-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .password-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      background: hsl(var(--primary) / 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      color: hsl(var(--primary));
+    }
+
+    .password-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: hsl(var(--foreground));
+      text-align: center;
+    }
+
+    .password-subtitle {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .password-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .password-input {
+      width: 100%;
+      height: 3rem;
+      padding: 0 1rem;
+      font-size: 1rem;
+      text-align: center;
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.5rem;
+      background: hsl(var(--background));
+      color: hsl(var(--foreground));
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .password-input:focus {
+      border-color: hsl(var(--primary));
+      box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+    }
+
+    .password-input.error {
+      border-color: hsl(var(--destructive));
+    }
+
+    .password-error {
+      color: hsl(var(--destructive));
+      font-size: 0.875rem;
+      text-align: center;
+      display: none;
+    }
+
+    .password-error.visible {
+      display: block;
+    }
+
+    .password-button {
+      width: 100%;
+      height: 3rem;
+      background: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .password-button:hover {
+      background: hsl(var(--primary) / 0.9);
+    }
+
+    .main-content {
+      display: none;
+    }
+
+    .main-content.visible {
+      display: block;
     }
 
     /* Background Pattern */
@@ -529,7 +649,7 @@
       flex: 1;
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-size: 1.125rem;
-      font-weight: 500;
+      font-weight: 600;
       color: hsl(var(--foreground));
       transition: color 0.3s;
     }
@@ -667,379 +787,435 @@
   </style>
 </head>
 <body>
-  <!-- Background Pattern -->
-  <div class="background-pattern">
-    <svg class="grid-pattern" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="smallGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
-        </pattern>
-        <pattern id="largeGrid" width="120" height="120" patternUnits="userSpaceOnUse">
-          <rect width="120" height="120" fill="url(#smallGrid)"/>
-          <path d="M 120 0 L 0 0 0 120" fill="none" stroke="currentColor" stroke-width="1"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#largeGrid)" />
-    </svg>
-    <svg class="diagonal-pattern" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="diagonals" width="60" height="60" patternUnits="userSpaceOnUse">
-          <path d="M 0 60 L 60 0" fill="none" stroke="currentColor" stroke-width="0.5"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#diagonals)" />
-    </svg>
-    <div class="geo-shape" style="top:5%;left:8%;width:10rem;height:10rem;border-color:hsl(160 70% 40%/0.1);"></div>
-    <div class="geo-shape geo-square" style="top:15%;right:12%;width:6rem;height:6rem;border-color:hsl(35 90% 55%/0.15);transform:rotate(45deg);"></div>
-    <div class="geo-shape" style="top:35%;left:3%;width:8rem;height:8rem;border-width:2px;border-color:hsl(160 70% 40%/0.08);"></div>
-    <div class="geo-shape" style="top:45%;right:5%;width:12rem;height:12rem;border-color:hsl(35 90% 55%/0.1);"></div>
-    <div class="geo-shape geo-square" style="top:55%;left:15%;width:5rem;height:5rem;border-color:hsl(160 70% 40%/0.12);transform:rotate(45deg);"></div>
-    <div class="geo-shape" style="top:65%;right:18%;width:9rem;height:9rem;border-color:hsl(160 70% 40%/0.08);"></div>
-    <div class="gradient-blob" style="top:10%;left:20%;width:500px;height:500px;background:hsl(160 70% 40%/0.05);"></div>
-    <div class="gradient-blob" style="top:40%;right:10%;width:400px;height:400px;background:hsl(35 90% 55%/0.08);"></div>
-    <div class="gradient-blob" style="top:70%;left:30%;width:450px;height:450px;background:hsl(150 25% 90%/0.2);"></div>
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate">
+    <div class="password-card">
+      <div class="password-header">
+        <div class="password-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h1 class="password-title">Мастермайнд</h1>
+        <p class="password-subtitle">Введите пароль для доступа</p>
+      </div>
+      <form class="password-form" onsubmit="checkPassword(event)">
+        <input type="password" class="password-input" id="passwordInput" placeholder="Пароль" autofocus>
+        <p class="password-error" id="passwordError">Неверный пароль</p>
+        <button type="submit" class="password-button">Войти</button>
+      </form>
+    </div>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-shape" style="top:5rem;right:10%;width:16rem;height:16rem;border:2px solid hsl(160 70% 40%/0.2);"></div>
-    <div class="hero-shape" style="bottom:8rem;left:5%;width:12rem;height:12rem;border:1px solid hsl(35 90% 55%/0.3);"></div>
-    <div class="hero-shape geo-square" style="top:40%;right:20%;width:8rem;height:8rem;border:1px solid hsl(160 70% 40%/0.15);transform:rotate(45deg);"></div>
-    <div class="hero-blur" style="top:5rem;left:2.5rem;width:18rem;height:18rem;background:hsl(160 70% 40%/0.1);"></div>
-    <div class="hero-blur" style="bottom:5rem;right:2.5rem;width:24rem;height:24rem;background:hsl(35 90% 55%/0.2);"></div>
-    <div class="hero-blur" style="top:50%;left:33%;width:16rem;height:16rem;background:hsl(150 25% 90%/0.3);"></div>
-    
-    <div class="hero-content">
-      <div class="badge animate-fade-up">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-        <span>Бизнес-сообщество</span>
-      </div>
-      
-      <h1 class="animate-fade-up delay-100">
-        <span>Мастермайнд</span>
-      </h1>
-      
-      <p class="hero-subtitle animate-fade-up delay-200">
-        Пространство для роста, поддержки и созидания.
-        <span class="highlight">Ценности и правила, которые объединяют нас.</span>
-      </p>
-      
-      <div class="hero-divider animate-fade-up delay-300">
-        <div class="line"></div>
-        <div class="dot animate-pulse"></div>
-        <div class="line"></div>
-      </div>
-      
-      <button class="scroll-btn animate-fade-up delay-400" onclick="document.getElementById('values').scrollIntoView({behavior:'smooth'})">
-        <span>Узнать больше</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-bounce"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <!-- Background Pattern -->
+    <div class="background-pattern">
+      <svg class="grid-pattern" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="smallGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
+          </pattern>
+          <pattern id="largeGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+            <rect width="120" height="120" fill="url(#smallGrid)"/>
+            <path d="M 120 0 L 0 0 0 120" fill="none" stroke="currentColor" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#largeGrid)" />
+      </svg>
+      <svg class="diagonal-pattern" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="diagonals" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 0 60 L 60 0" fill="none" stroke="currentColor" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#diagonals)" />
+      </svg>
+      <div class="geo-shape" style="top:5%;left:8%;width:10rem;height:10rem;border-color:hsl(160 70% 40%/0.1);"></div>
+      <div class="geo-shape geo-square" style="top:15%;right:12%;width:6rem;height:6rem;border-color:hsl(35 90% 55%/0.15);transform:rotate(45deg);"></div>
+      <div class="geo-shape" style="top:35%;left:3%;width:8rem;height:8rem;border-width:2px;border-color:hsl(160 70% 40%/0.08);"></div>
+      <div class="geo-shape" style="top:45%;right:5%;width:12rem;height:12rem;border-color:hsl(35 90% 55%/0.1);"></div>
+      <div class="geo-shape geo-square" style="top:55%;left:15%;width:5rem;height:5rem;border-color:hsl(160 70% 40%/0.12);transform:rotate(45deg);"></div>
+      <div class="geo-shape" style="top:65%;right:18%;width:9rem;height:9rem;border-color:hsl(160 70% 40%/0.08);"></div>
+      <div class="gradient-blob" style="top:10%;left:20%;width:500px;height:500px;background:hsl(160 70% 40%/0.05);"></div>
+      <div class="gradient-blob" style="top:40%;right:10%;width:400px;height:400px;background:hsl(35 90% 55%/0.08);"></div>
+      <div class="gradient-blob" style="top:70%;left:30%;width:450px;height:450px;background:hsl(150 25% 90%/0.2);"></div>
     </div>
-  </section>
 
-  <!-- Values Section -->
-  <section class="values" id="values">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Что нас объединяет</span>
-        <h2 class="section-title">Наши ценности</h2>
-        <div class="section-divider">
-          <div class="line"></div>
-          <div class="dot"></div>
-          <div class="line"></div>
-        </div>
-      </div>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-shape" style="top:5rem;right:10%;width:16rem;height:16rem;border:2px solid hsl(160 70% 40%/0.2);"></div>
+      <div class="hero-shape" style="bottom:8rem;left:5%;width:12rem;height:12rem;border:1px solid hsl(35 90% 55%/0.3);"></div>
+      <div class="hero-shape geo-square" style="top:40%;right:20%;width:8rem;height:8rem;border:1px solid hsl(160 70% 40%/0.15);transform:rotate(45deg);"></div>
+      <div class="hero-blur" style="top:5rem;left:2.5rem;width:18rem;height:18rem;background:hsl(160 70% 40%/0.1);"></div>
+      <div class="hero-blur" style="bottom:5rem;right:2.5rem;width:24rem;height:24rem;background:hsl(35 90% 55%/0.2);"></div>
+      <div class="hero-blur" style="top:50%;left:33%;width:16rem;height:16rem;background:hsl(150 25% 90%/0.3);"></div>
       
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-          </div>
-          <h3>Экологичный бизнес</h3>
-          <p>Нам важен экологичный бизнес, поэтому мы не рассматриваем бизнесы, построенные на темах, схемах и коррупции. Мы ценим ниши и бизнесы, которые что-то полезное создают в мире.</p>
-          <div class="bottom-line"></div>
+      <div class="hero-content">
+        <div class="badge animate-fade-up">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          <span>Бизнес-сообщество</span>
         </div>
         
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          </div>
-          <h3>Развитие</h3>
-          <p>Нам важно развитие. Поэтому мы рассматриваем участников, заинтересованных в развитии. А также обязуемся рассматривать каждого участника как неслучайного, каждое эмоциональное событие как вероятно важное для себя — т.е. брать 1%+ ответственности за всё происходящее в программе. Воспринимать людей как зеркала. Проявлять открытость, т.е. готовность принимать идеи и обратную связь участников программы (не обязательно при этом их 100% реализовывать).</p>
-          <div class="bottom-line"></div>
-        </div>
-        
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <h3>Глубина</h3>
-          <p>Нам важна глубина. Поэтому мы поддерживаем открытость и искренность свою и других участников, а также сообщаем группе о том, что этому может препятствовать.</p>
-          <div class="bottom-line"></div>
-        </div>
-        
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-          </div>
-          <h3>Мягкая и поддерживающая среда</h3>
-          <p>Нам важна мягкая и поддерживающая среда. Поэтому мы следим за форматом, в котором даём обратную связь и коммуницируем с другими участниками. Также у нас существует правило СТОП: каждый участник может сигнализировать в процессе общения или обратной связи, что коммуникация его ранит и её необходимо прекратить.</p>
-          <div class="bottom-line"></div>
-        </div>
-        
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
-          </div>
-          <h3>Созидание</h3>
-          <p>Нам важно созидание. А значит мы ценим и поддерживаем активность и вклад других участников, а также не поддерживаем участие тех, кто пришёл только получать.</p>
-          <div class="bottom-line"></div>
-        </div>
-        
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>
-          </div>
-          <h3>Лёгкость</h3>
-          <p>Мы ценим лёгкость. Если мы можем облегчить какой-то процесс, то мы делаем его легче.</p>
-          <div class="bottom-line"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Rules Section -->
-  <section class="rules">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Обязательства участников</span>
-        <h2 class="section-title">Правила мастермайнда</h2>
-        <p class="rules-intro">Присоединяясь к данной программе, каждый участник подтверждает своё намерение соблюдать правила и помогать в их соблюдении другим.</p>
-      </div>
-      
-      <div class="rules-card">
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">1</span>
-            <span class="rule-title">Набор новых участников</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Любой из участников выносит кандидатуру нового участника, кандидат проходит адмиссию с организатором, и в случае успеха проходит адмиссию у группы, после этого участнику назначается разбор 360. Решение о приёме принимается 100% голосов.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">2</span>
-            <span class="rule-title">Разборы</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Разборы проводятся в соответствии с очерёдностью. Задача группы несмотря на наличие запроса, выяснить истинный запрос участника и в этой связи, часто разборы идут не по сценарию. Если у участника нет запроса, то он приходит на разбор 360. По итогам разбора в течение 24 часов участник пишет рефлексию в группу. На полученную рефлексию участники могут давать обратную связь, если видят разницу с информацией полученной на разборе. Новый участник включается в график дополнительным разбором к плановому.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">3</span>
-            <span class="rule-title">Механизм разрешения конфликтов</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Участник берёт на себя обязательство повышать свой уровень доверия, в т.ч. проговаривать в течение недели все «внутренние разговоры» к другим участникам программы. Если разговор не приводит к снятию напряжения, то любой из участников может вынести tension на группу. Группа даёт обратную связь и каждому из участников может быть вынесен список корректирующей обратной связи. Если это не сработало, любой участник может вынести запрос об отчислении. Решение об отчислении принимается большинством голосов.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">4</span>
-            <span class="rule-title">Регламент выхода участника</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Участник озвучивает желание и причину выхода, приходит на завершающую встречу. Если выход без разбора, то выход считается нештатным и дальнейший вход в ММ будет закрыт.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">5</span>
-            <span class="rule-title">Депозиты и взносы</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Депозит, внесённый на совместный выезд не возвращается, в случае отказа от выезда, поскольку решение уже принято и затрагивает всех участников. Взнос за участие в Мастермайнде является невозвратным.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">6</span>
-            <span class="rule-title">Конфиденциальность</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>На 100% соблюдать конфиденциальность всей информации, которая обсуждается в группе. Нарушение ведёт к прекращению участия.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">7</span>
-            <span class="rule-title">Регулярность встреч</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Встречаться раз в две недели или каждую неделю. Встречи-разборы 1 раз в две недели.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">8</span>
-            <span class="rule-title">Формат встреч</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Встречи проходят оффлайн с 17 до 21 (всё время Мск), по вторникам, возможны переносы по решению большинства. Пропуск любой части разбора засчитывается, как пропуск обязательной встречи.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">9</span>
-            <span class="rule-title">Допустимые пропуски</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>За период возможно два пропуска разборов. Также договорились, что за 2026 календарный год, каждый участник имеет право на отпуск в количестве 2 пропусков обязательных встреч. Больше — участник исключается. Участник предупреждает о своих пропусках официальных встреч сразу как узнаёт, так как это позволяет группе планировать состав на разборе.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">10</span>
-            <span class="rule-title">Пунктуальность</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>На встречи-разборы важно приходить вовремя (15 мин тех опоздание), те кто опаздывают — подключаются онлайн по истечении 15 мин. Если опоздание без подключения, то договорились, что участник оплачивает ужин всем.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">11</span>
-            <span class="rule-title">Коллективная ответственность</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Ответственность за исполнение правил лежит на всех участниках, то есть все участники стараются минимизировать нарушения правил группой.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">12</span>
-            <span class="rule-title">Очный формат</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Мастермайнд задуман как очное мероприятие. Посещение встреч онлайн только по уважительной причине, причина озвучивается в чат заранее.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">13</span>
-            <span class="rule-title">Голосование</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Вопросы решаем большинством голосов, право вето у организатора.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">14</span>
-            <span class="rule-title">Публикация отчётов</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Для сохранения общего контекста группы, обязуюсь писать отчёт о прошедшей неделе до 23:59 понедельника. Отчёты включают результаты недели, в бизнесе и/или личные, пульс группы. При нарушении участник на следующую встречу приносит угощение всем участникам.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="rule-item">
-          <button class="rule-header" onclick="toggleRule(this)">
-            <span class="rule-number">15</span>
-            <span class="rule-title">Личные отношения</span>
-            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="rule-content">
-            <div class="rule-description">
-              <p>Запрещается вступать в личные интимные отношения с участниками группы, а также в долевые бизнес-партнёрства. Дружба не запрещена. Оказание услуг не запрещено.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+        <h1 class="animate-fade-up delay-100">
           <span>Мастермайнд</span>
-        </div>
-        <div class="footer-heart">
-          <span>Создано с</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          <span>для сообщества</span>
-        </div>
-        <div class="footer-copy">
+        </h1>
+        
+        <p class="hero-subtitle animate-fade-up delay-200">
+          Пространство для роста, поддержки и созидания.
+          <span class="highlight">Ценности и правила, которые объединяют нас.</span>
+        </p>
+        
+        <div class="hero-divider animate-fade-up delay-300">
           <div class="line"></div>
-          <p>© 2025 Мастермайнд. Все права защищены.</p>
+          <div class="dot animate-pulse"></div>
           <div class="line"></div>
+        </div>
+        
+        <button class="scroll-btn animate-fade-up delay-400" onclick="document.getElementById('values').scrollIntoView({behavior:'smooth'})">
+          <span>Узнать больше</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-bounce"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values" id="values">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Что нас объединяет</span>
+          <h2 class="section-title">Наши ценности</h2>
+          <div class="section-divider">
+            <div class="line"></div>
+            <div class="dot"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+        
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            </div>
+            <h3>Экологичный бизнес</h3>
+            <p>Нам важен экологичный бизнес, поэтому мы не рассматриваем бизнесы, построенные на темах, схемах и коррупции. Мы ценим ниши и бизнесы, которые что-то полезное создают в мире.</p>
+            <div class="bottom-line"></div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <h3>Развитие</h3>
+            <p>Нам важно развитие. Поэтому мы рассматриваем участников, заинтересованных в развитии. А также обязуемся рассматривать каждого участника как неслучайного, каждое эмоциональное событие как вероятно важное для себя — т.е. брать 1%+ ответственности за всё происходящее в программе. Воспринимать людей как зеркала. Проявлять открытость, т.е. готовность принимать идеи и обратную связь участников программы (не обязательно при этом их 100% реализовывать).</p>
+            <div class="bottom-line"></div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <h3>Глубина</h3>
+            <p>Нам важна глубина. Поэтому мы поддерживаем открытость и искренность свою и других участников, а также сообщаем группе о том, что этому может препятствовать.</p>
+            <div class="bottom-line"></div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            </div>
+            <h3>Мягкая и поддерживающая среда</h3>
+            <p>Нам важна мягкая и поддерживающая среда. Поэтому мы следим за форматом, в котором даём обратную связь и коммуницируем с другими участниками. Также у нас существует правило СТОП: каждый участник может сигнализировать в процессе общения или обратной связи, что коммуникация его ранит и её необходимо прекратить.</p>
+            <div class="bottom-line"></div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
+            </div>
+            <h3>Созидание</h3>
+            <p>Нам важно созидание. А значит мы ценим и поддерживаем активность и вклад других участников, а также не поддерживаем участие тех, кто пришёл только получать.</p>
+            <div class="bottom-line"></div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>
+            </div>
+            <h3>Лёгкость</h3>
+            <p>Мы ценим лёгкость. Если мы можем облегчить какой-то процесс, то мы делаем его легче.</p>
+            <div class="bottom-line"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <!-- Rules Section -->
+    <section class="rules">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Обязательства участников</span>
+          <h2 class="section-title">Правила мастермайнда</h2>
+          <p class="rules-intro">Присоединяясь к данной программе, каждый участник подтверждает своё намерение соблюдать правила и помогать в их соблюдении другим.</p>
+        </div>
+        
+        <div class="rules-card">
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">1</span>
+              <span class="rule-title">Набор новых участников</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Любой из участников выносит кандидатуру нового участника, кандидат проходит адмиссию с организатором, и в случае успеха проходит адмиссию у группы, после этого участнику назначается разбор 360. Решение о приёме принимается 100% голосов.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">2</span>
+              <span class="rule-title">Разборы</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Разборы проводятся в соответствии с очерёдностью. Задача группы несмотря на наличие запроса, выяснить истинный запрос участника и в этой связи, часто разборы идут не по сценарию. Если у участника нет запроса, то он приходит на разбор 360. По итогам разбора в течение 24 часов участник пишет рефлексию в группу. На полученную рефлексию участники могут давать обратную связь, если видят разницу с информацией полученной на разборе. Новый участник включается в график дополнительным разбором к плановому.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">3</span>
+              <span class="rule-title">Механизм разрешения конфликтов</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Участник берёт на себя обязательство повышать свой уровень доверия, в т.ч. проговаривать в течение недели все «внутренние разговоры» к другим участникам программы. Если разговор не приводит к снятию напряжения, то любой из участников может вынести tension на группу. Группа даёт обратную связь и каждому из участников может быть вынесен список корректирующей обратной связи. Если это не сработало, любой участник может вынести запрос об отчислении. Решение об отчислении принимается большинством голосов.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">4</span>
+              <span class="rule-title">Регламент выхода участника</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Участник озвучивает желание и причину выхода, приходит на завершающую встречу. Если выход без разбора, то выход считается нештатным и дальнейший вход в ММ будет закрыт.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">5</span>
+              <span class="rule-title">Депозиты и взносы</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Депозит, внесённый на совместный выезд не возвращается, в случае отказа от выезда, поскольку решение уже принято и затрагивает всех участников. Взнос за участие в Мастермайнде является невозвратным.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">6</span>
+              <span class="rule-title">Конфиденциальность</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>На 100% соблюдать конфиденциальность всей информации, которая обсуждается в группе. Нарушение ведёт к прекращению участия.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">7</span>
+              <span class="rule-title">Регулярность встреч</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Встречаться раз в две недели или каждую неделю. Встречи-разборы 1 раз в две недели.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">8</span>
+              <span class="rule-title">Формат встреч</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Встречи проходят оффлайн с 17 до 21 (всё время Мск), по вторникам, возможны переносы по решению большинства. Пропуск любой части разбора засчитывается, как пропуск обязательной встречи.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">9</span>
+              <span class="rule-title">Допустимые пропуски</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>За период возможно два пропуска разборов. Также договорились, что за 2026 календарный год, каждый участник имеет право на отпуск в количестве 2 пропусков обязательных встреч. Больше — участник исключается. Участник предупреждает о своих пропусках официальных встреч сразу как узнаёт, так как это позволяет группе планировать состав на разборе.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">10</span>
+              <span class="rule-title">Пунктуальность</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>На встречи-разборы важно приходить вовремя (15 мин тех опоздание), те кто опаздывают — подключаются онлайн по истечении 15 мин. Если опоздание без подключения, то договорились, что участник оплачивает ужин всем.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">11</span>
+              <span class="rule-title">Коллективная ответственность</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Ответственность за исполнение правил лежит на всех участниках, то есть все участники стараются минимизировать нарушения правил группой.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">12</span>
+              <span class="rule-title">Очный формат</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Мастермайнд задуман как очное мероприятие. Посещение встреч онлайн только по уважительной причине, причина озвучивается в чат заранее.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">13</span>
+              <span class="rule-title">Голосование</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Вопросы решаем большинством голосов, право вето у организатора.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">14</span>
+              <span class="rule-title">Публикация отчётов</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Для сохранения общего контекста группы, обязуюсь писать отчёт о прошедшей неделе до 23:59 понедельника. Отчёты включают результаты недели, в бизнесе и/или личные, пульс группы. При нарушении участник на следующую встречу приносит угощение всем участникам.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rule-item">
+            <button class="rule-header" onclick="toggleRule(this)">
+              <span class="rule-number">15</span>
+              <span class="rule-title">Личные отношения</span>
+              <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="rule-content">
+              <div class="rule-description">
+                <p>Запрещается вступать в личные интимные отношения с участниками группы, а также в долевые бизнес-партнёрства. Дружба не запрещена. Оказание услуг не запрещено.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+            <span>Мастермайнд</span>
+          </div>
+          <div class="footer-heart">
+            <span>Создано с</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span>для сообщества</span>
+          </div>
+          <div class="footer-copy">
+            <div class="line"></div>
+            <p>© 2025 Мастермайнд. Все права защищены.</p>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <script>
+    const CORRECT_PASSWORD = 'InUsWeTrust';
+    const STORAGE_KEY = 'mastermind_access';
+
+    // Check if already authenticated
+    if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
+      showContent();
+    }
+
+    function checkPassword(e) {
+      e.preventDefault();
+      const input = document.getElementById('passwordInput');
+      const error = document.getElementById('passwordError');
+      
+      if (input.value === CORRECT_PASSWORD) {
+        sessionStorage.setItem(STORAGE_KEY, 'true');
+        showContent();
+      } else {
+        input.classList.add('error');
+        error.classList.add('visible');
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    function showContent() {
+      document.getElementById('passwordGate').style.display = 'none';
+      document.getElementById('mainContent').classList.add('visible');
+    }
+
+    // Remove error state on input
+    document.getElementById('passwordInput').addEventListener('input', function() {
+      this.classList.remove('error');
+      document.getElementById('passwordError').classList.remove('visible');
+    });
+
     // Accordion toggle
     function toggleRule(button) {
       const item = button.parentElement;
