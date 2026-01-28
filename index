@@ -6,26 +6,26 @@
   <title>Мастермайнд — ценности и правила</title>
   <meta name="description" content="Мастермайнд — пространство для роста, поддержки и созидания. Ценности и правила бизнес-сообщества." />
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts (ВМЕСТО @import) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* RESET */
-    *, *::before, *::after {
-      box-sizing: border-box;
+    /* ===== RESET (обязательно для GitHub Pages) ===== */
+    html, body {
       margin: 0;
       padding: 0;
     }
 
-    body {
-      margin: 0;
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
 
-    /* ===== ТВОЙ CSS (БЕЗ ИЗМЕНЕНИЙ ПО СУТИ) ===== */
+    /* ===== ТВОЙ CSS — 1 В 1 ===== */
 
     .mm-page {
+      min-height: 100vh;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #faf8f5 0%, #f5f0e8 100%);
       color: #1a1a1a;
@@ -38,6 +38,7 @@
       padding: 0 24px;
     }
 
+    /* Hero Section */
     .mm-hero {
       text-align: center;
       padding: 80px 24px;
@@ -60,7 +61,8 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(48px, 8vw, 72px);
       font-weight: 600;
-      margin-bottom: 24px;
+      color: #1a1a1a;
+      margin: 0 0 24px;
     }
 
     .mm-subtitle {
@@ -75,6 +77,7 @@
       font-weight: 500;
     }
 
+    /* Values Section */
     .mm-values {
       padding: 80px 24px;
     }
@@ -96,7 +99,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(36px, 5vw, 48px);
       font-weight: 600;
-      margin-top: 16px;
+      margin: 16px 0 0;
     }
 
     .mm-values-grid {
@@ -130,6 +133,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
+      color: #166552;
       font-size: 24px;
     }
 
@@ -137,14 +141,75 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin: 0 0 12px;
     }
 
     .mm-value-text {
       color: #666;
       font-size: 15px;
+      margin: 0;
     }
 
+    /* Rules Section */
+    .mm-rules {
+      padding: 80px 24px;
+      background: rgba(22, 101, 82, 0.03);
+    }
+
+    .mm-rules-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .mm-rule {
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
+    }
+
+    .mm-rule:last-child {
+      border-bottom: none;
+    }
+
+    .mm-rule-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .mm-rule-number {
+      width: 40px;
+      height: 40px;
+      background: rgba(22, 101, 82, 0.1);
+      color: #166552;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .mm-rule-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .mm-rule-text {
+      color: #666;
+      font-size: 15px;
+      margin: 16px 0 0 56px;
+      line-height: 1.7;
+    }
+
+    /* Footer */
     .mm-footer {
       text-align: center;
       padding: 48px 24px;
@@ -159,7 +224,7 @@
 
 <div class="mm-page">
 
-  <!-- HERO -->
+  <!-- Hero -->
   <section class="mm-hero">
     <div class="mm-badge">✨ Бизнес-сообщество</div>
     <h1 class="mm-title">Мастермайнд</h1>
@@ -169,7 +234,7 @@
     </p>
   </section>
 
-  <!-- VALUES -->
+  <!-- Values -->
   <section class="mm-values">
     <div class="mm-section-header">
       <div class="mm-section-label">Что нас объединяет</div>
@@ -177,12 +242,47 @@
     </div>
 
     <div class="mm-values-grid">
-      <!-- карточки без изменений -->
-      <!-- можешь вставить все свои карточки сюда -->
+
+      <div class="mm-value-card">
+        <div class="mm-value-icon">🌿</div>
+        <h3 class="mm-value-title">Экологичный бизнес</h3>
+        <p class="mm-value-text">Нам важен экологичный бизнес, поэтому мы не рассматриваем бизнесы, построенные на темах, схемах и коррупции.</p>
+      </div>
+
+      <div class="mm-value-card">
+        <div class="mm-value-icon">📈</div>
+        <h3 class="mm-value-title">Развитие</h3>
+        <p class="mm-value-text">Нам важно развитие и готовность брать ответственность за происходящее.</p>
+      </div>
+
+      <div class="mm-value-card">
+        <div class="mm-value-icon">❤️</div>
+        <h3 class="mm-value-title">Глубина</h3>
+        <p class="mm-value-text">Мы поддерживаем искренность и открытость участников.</p>
+      </div>
+
+      <div class="mm-value-card">
+        <div class="mm-value-icon">🛡️</div>
+        <h3 class="mm-value-title">Поддерживающая среда</h3>
+        <p class="mm-value-text">В группе действует правило бережной коммуникации и СТОП.</p>
+      </div>
+
+      <div class="mm-value-card">
+        <div class="mm-value-icon">🔨</div>
+        <h3 class="mm-value-title">Созидание</h3>
+        <p class="mm-value-text">Мы ценим вклад и активное участие.</p>
+      </div>
+
+      <div class="mm-value-card">
+        <div class="mm-value-icon">🪶</div>
+        <h3 class="mm-value-title">Лёгкость</h3>
+        <p class="mm-value-text">Мы стараемся упрощать процессы, где это возможно.</p>
+      </div>
+
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer class="mm-footer">
     <p>Создано с ❤️ для сообщества</p>
     <p>© 2025 Мастермайнд. Все права защищены.</p>
