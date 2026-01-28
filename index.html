@@ -1,275 +1,663 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Мастермайнд — ценности и правила</title>
-  <meta name="description" content="Мастермайнд — пространство для роста, поддержки и созидания. Ценности и правила бизнес-сообщества." />
-
-  <!-- Google Fonts (НЕ через @import) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мастермайнд — Ценности и правила</title>
+  <meta name="description" content="Пространство для роста, поддержки и созидания. Ценности и правила бизнес-сообщества Мастермайнд.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
-    /* ===== RESET (обязательно для GitHub Pages) ===== */
-    html, body {
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
+    
+    :root {
+      --color-bg: #FAF9F6;
+      --color-bg-secondary: #F5F3EF;
+      --color-text: #1a1a1a;
+      --color-text-muted: #6b6b6b;
+      --color-primary: #2d5a4a;
+      --color-primary-light: rgba(45, 90, 74, 0.1);
+      --color-accent: #c9a86c;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-card: #ffffff;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.08);
+      --radius: 16px;
     }
-
-    /* ===== ТВОЙ CSS (1-в-1) ===== */
-
-    .mm-page {
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #faf8f5 0%, #f5f0e8 100%);
-      color: #1a1a1a;
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+      color: var(--color-text);
       line-height: 1.6;
+      min-height: 100vh;
     }
-
-    .mm-container {
+    
+    .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
     }
-
+    
     /* Hero Section */
-    .mm-hero {
-      text-align: center;
-      padding: 80px 24px;
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
+      overflow: hidden;
+      padding: 80px 0;
     }
-
-    .mm-badge {
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 80px;
+      left: 40px;
+      width: 300px;
+      height: 300px;
+      background: var(--color-primary-light);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      width: 400px;
+      height: 400px;
+      background: rgba(201, 168, 108, 0.1);
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 8px 16px;
-      background: rgba(22, 101, 82, 0.1);
-      color: #166552;
-      border-radius: 50px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border-radius: 100px;
       font-size: 14px;
       font-weight: 500;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
-
-    .mm-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(48px, 8vw, 72px);
+    
+    .hero-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 8vw, 80px);
       font-weight: 600;
-      color: #1a1a1a;
-      margin: 0 0 24px;
+      color: var(--color-text);
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
     }
-
-    .mm-subtitle {
-      font-size: 20px;
-      color: #666;
+    
+    .hero p {
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--color-text-muted);
       max-width: 600px;
       margin: 0 auto;
+      line-height: 1.7;
     }
-
-    .mm-subtitle span {
-      color: #166552;
+    
+    .hero p .highlight {
+      color: var(--color-primary);
       font-weight: 500;
     }
-
+    
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    
+    .hero-divider-line {
+      width: 64px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-primary));
+    }
+    
+    .hero-divider-line:last-child {
+      background: linear-gradient(90deg, var(--color-primary), transparent);
+    }
+    
+    .hero-divider-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+    
     /* Values Section */
-    .mm-values {
-      padding: 80px 24px;
+    .values {
+      padding: 96px 0;
     }
-
-    .mm-section-header {
+    
+    .section-header {
       text-align: center;
-      margin-bottom: 48px;
+      max-width: 600px;
+      margin: 0 auto 64px;
     }
-
-    .mm-section-label {
-      color: #166552;
+    
+    .section-label {
       font-size: 14px;
       font-weight: 500;
+      color: var(--color-primary);
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
     }
-
-    .mm-section-title {
-      font-family: 'Cormorant Garamond', serif;
+    
+    .section-title {
+      font-family: var(--font-display);
       font-size: clamp(36px, 5vw, 48px);
       font-weight: 600;
-      margin: 16px 0 0;
+      color: var(--color-text);
     }
-
-    .mm-values-grid {
+    
+    .values-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 24px;
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
     }
-
-    .mm-value-card {
-      background: #fff;
-      border-radius: 16px;
+    
+    .value-card {
+      background: var(--color-card);
       padding: 32px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      border: 1px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--color-border);
+      position: relative;
+      transition: all 0.4s ease;
     }
-
-    .mm-value-card:hover {
+    
+    .value-card:hover {
+      box-shadow: var(--shadow-card);
       transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
     }
-
-    .mm-value-icon {
+    
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 32px;
+      right: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(45, 90, 74, 0.3), transparent);
+    }
+    
+    .value-icon {
       width: 56px;
       height: 56px;
-      background: rgba(22, 101, 82, 0.1);
       border-radius: 12px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
-      color: #166552;
-      font-size: 24px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
     }
-
-    .mm-value-title {
-      font-family: 'Cormorant Garamond', serif;
+    
+    .value-card:hover .value-icon {
+      background: var(--color-primary);
+      color: white;
+    }
+    
+    .value-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .value-card h3 {
+      font-family: var(--font-display);
       font-size: 24px;
       font-weight: 600;
-      margin: 0 0 12px;
+      color: var(--color-text);
+      margin-bottom: 12px;
     }
-
-    .mm-value-text {
-      color: #666;
+    
+    .value-card p {
       font-size: 15px;
-      margin: 0;
+      color: var(--color-text-muted);
+      line-height: 1.7;
     }
-
+    
     /* Rules Section */
-    .mm-rules {
-      padding: 80px 24px;
-      background: rgba(22, 101, 82, 0.03);
+    .rules {
+      padding: 96px 0;
+      background: var(--color-bg-secondary);
+      position: relative;
     }
-
-    .mm-rules-container {
+    
+    .rules::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+    }
+    
+    .section-description {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+    
+    .rules-container {
       max-width: 800px;
       margin: 0 auto;
-      background: #fff;
-      border-radius: 16px;
+      background: var(--color-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
       padding: 32px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
-
-    .mm-rule {
-      border-bottom: 1px solid #eee;
-      padding: 20px 0;
+    
+    .rule-item {
+      border-bottom: 1px solid var(--color-border);
     }
-
-    .mm-rule:last-child {
+    
+    .rule-item:last-child {
       border-bottom: none;
     }
-
-    .mm-rule-header {
+    
+    .rule-header {
       display: flex;
       align-items: center;
       gap: 16px;
+      padding: 20px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
-
-    .mm-rule-number {
+    
+    .rule-header:hover .rule-number {
+      background: var(--color-primary);
+      color: white;
+    }
+    
+    .rule-number {
+      flex-shrink: 0;
       width: 40px;
       height: 40px;
-      background: rgba(22, 101, 82, 0.1);
-      color: #166552;
       border-radius: 50%;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-weight: 600;
-      flex-shrink: 0;
+      transition: all 0.3s ease;
     }
-
-    .mm-rule-title {
-      font-family: 'Cormorant Garamond', serif;
+    
+    .rule-title {
+      font-family: var(--font-display);
       font-size: 18px;
       font-weight: 500;
-      margin: 0;
+      color: var(--color-text);
+      flex-grow: 1;
     }
-
-    .mm-rule-text {
-      color: #666;
+    
+    .rule-toggle {
+      width: 24px;
+      height: 24px;
+      color: var(--color-text-muted);
+      transition: transform 0.3s ease;
+    }
+    
+    .rule-item.open .rule-toggle {
+      transform: rotate(180deg);
+    }
+    
+    .rule-content {
+      display: none;
+      padding: 0 0 20px 56px;
+    }
+    
+    .rule-item.open .rule-content {
+      display: block;
+    }
+    
+    .rule-content p {
       font-size: 15px;
-      margin: 16px 0 0 56px;
+      color: var(--color-text-muted);
       line-height: 1.7;
     }
-
+    
     /* Footer */
-    .mm-footer {
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--color-border);
       text-align: center;
-      padding: 48px 24px;
-      border-top: 1px solid #eee;
-      color: #999;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .footer-text {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 14px;
+      color: var(--color-text-muted);
+    }
+    
+    .footer-text svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-accent);
+      fill: var(--color-accent);
+    }
+    
+    .footer-copyright {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      opacity: 0.6;
+    }
+    
+    @media (max-width: 768px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .rules-container {
+        padding: 24px;
+      }
+      
+      .rule-content {
+        padding-left: 0;
+      }
     }
   </style>
 </head>
-
 <body>
-
-<div class="mm-page">
-
-  <!-- Hero -->
-  <section class="mm-hero">
-    <div class="mm-badge">✨ Бизнес-сообщество</div>
-    <h1 class="mm-title">Мастермайнд</h1>
-    <p class="mm-subtitle">
-      Пространство для роста, поддержки и созидания.
-      <span>Ценности и правила</span>, которые объединяют нас.
-    </p>
-  </section>
-
-  <!-- Values -->
-  <section class="mm-values">
-    <div class="mm-section-header">
-      <div class="mm-section-label">Что нас объединяет</div>
-      <h2 class="mm-section-title">Наши ценности</h2>
-    </div>
-
-    <div class="mm-values-grid">
-      <!-- все карточки 1-в-1, без изменений -->
-      <!-- … (оставлены как у тебя) … -->
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          <span>Бизнес-сообщество</span>
+        </div>
+        <h1>Мастермайнд</h1>
+        <p>Пространство для роста, поддержки и созидания. <span class="highlight">Ценности и правила</span>, которые объединяют нас.</p>
+        <div class="hero-divider">
+          <div class="hero-divider-line"></div>
+          <div class="hero-divider-dot"></div>
+          <div class="hero-divider-line"></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Rules -->
-  <section class="mm-rules">
-    <div class="mm-section-header">
-      <div class="mm-section-label">Обязательства участников</div>
-      <h2 class="mm-section-title">Правила мастермайнда</h2>
-      <p style="color:#666; margin-top:16px; max-width:700px; margin-left:auto; margin-right:auto;">
-        Присоединяясь к данной программе, каждый участник подтверждает своё намерение соблюдать правила Мастермайнда и помогать в их соблюдении другим участникам.
-      </p>
+  <!-- Values Section -->
+  <section class="values">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Что нас объединяет</div>
+        <h2 class="section-title">Наши ценности</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </div>
+          <h3>Экологичный бизнес</h3>
+          <p>Нам важен экологичный бизнес, поэтому мы не рассматриваем бизнесы, построенные на темах, схемах и коррупции. Мы ценим ниши и бизнесы, которые что-то полезное создают в мире.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <h3>Развитие</h3>
+          <p>Нам важно развитие. Поэтому мы рассматриваем участников, заинтересованных в развитии. А также обязуемся рассматривать каждого участника как неслучайного, каждое эмоциональное событие как вероятно важное для себя — т.е. брать 1%+ ответственности за всё происходящее в программе. Воспринимать людей как зеркала. Проявлять открытость, т.е. готовность принимать идеи и обратную связь участников программы (не обязательно при этом их 100% реализовывать).</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3>Глубина</h3>
+          <p>Нам важна глубина. Поэтому мы поддерживаем открытость и искренность свою и других участников, а также сообщаем группе о том, что этому может препятствовать.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          </div>
+          <h3>Мягкая и поддерживающая среда</h3>
+          <p>Нам важна мягкая и поддерживающая среда. Поэтому мы следим за форматом, в котором даём обратную связь и коммуницируем с другими участниками. Также у нас существует правило СТОП: каждый участник может сигнализировать в процессе общения или обратной связи, что коммуникация его ранит и её необходимо прекратить.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
+          </div>
+          <h3>Созидание</h3>
+          <p>Нам важно созидание. А значит мы ценим и поддерживаем активность и вклад других участников, а также не поддерживаем участие тех, кто пришёл только получать.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" x2="2" y1="8" y2="22"/><line x1="17.5" x2="9" y1="15" y2="15"/></svg>
+          </div>
+          <h3>Лёгкость</h3>
+          <p>Мы ценим лёгкость. Если мы можем облегчить какой-то процесс, то мы делаем его легче.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="mm-rules-container">
-      <!-- правила 1–15 — без изменений -->
+  <!-- Rules Section -->
+  <section class="rules">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Обязательства участников</div>
+        <h2 class="section-title">Правила мастермайнда</h2>
+        <p class="section-description">Присоединяясь к данной программе, каждый участник подтверждает своё намерение соблюдать правила Мастермайнда и помогать в их соблюдении другим участникам.</p>
+      </div>
+      <div class="rules-container">
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">1</span>
+            <span class="rule-title">Набор новых участников</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Любой из участников выносит кандидатуру нового участника, кандидат проходит адмиссию с организатором, и в случае успеха проходит адмиссию у группы, после этого участнику назначается разбор 360. Решение о приёме принимается 100% голосов.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">2</span>
+            <span class="rule-title">Разборы</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Разборы проводятся в соответствии с очерёдностью. Задача группы несмотря на наличие запроса, выяснить истинный запрос участника и в этой связи, часто разборы идут не по сценарию. Если у участника нет запроса, то он приходит на разбор 360. По итогам разбора в течение 24 часов участник пишет рефлексию в группу. На полученную рефлексию участники могут давать обратную связь, если видят разницу с информацией полученной на разборе. Новый участник включается в график дополнительным разбором к плановому.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">3</span>
+            <span class="rule-title">Механизм разрешения конфликтов</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Участник берёт на себя обязательство повышать свой уровень доверия, в т.ч. проговаривать в течение недели все «внутренние разговоры» к другим участникам программы. Если разговор не приводит к снятию напряжения, то любой из участников может вынести tension на группу. Группа даёт обратную связь и каждому из участников может быть вынесен список корректирующей обратной связи. Если это не сработало, любой участник может вынести запрос об отчислении. Решение об отчислении принимается большинством голосов.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">4</span>
+            <span class="rule-title">Регламент выхода участника</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Участник озвучивает желание и причину выхода, приходит на завершающую встречу. Если выход без разбора, то выход считается нештатным и дальнейший вход в ММ будет закрыт.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">5</span>
+            <span class="rule-title">Депозиты и взносы</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Депозит, внесённый на совместный выезд не возвращается, в случае отказа от выезда, поскольку решение уже принято и затрагивает всех участников. Взнос за участие в Мастермайнде является невозвратным.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">6</span>
+            <span class="rule-title">Конфиденциальность</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>На 100% соблюдать конфиденциальность всей информации, которая обсуждается в группе. Нарушение ведёт к прекращению участия.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">7</span>
+            <span class="rule-title">Регулярность встреч</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Встречаться раз в две недели или каждую неделю. Встречи-разборы 1 раз в две недели.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">8</span>
+            <span class="rule-title">Формат встреч</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Встречи проходят оффлайн с 17 до 21 (всё время Мск), по вторникам, возможны переносы по решению большинства. Пропуск любой части разбора засчитывается, как пропуск обязательной встречи.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">9</span>
+            <span class="rule-title">Допустимые пропуски</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>За период возможно два пропуска разборов. Также договорились, что за 2026 календарный год, каждый участник имеет право на отпуск в количестве 2 пропусков обязательных встреч. Больше — участник исключается. Участник предупреждает о своих пропусках официальных встреч сразу как узнаёт, так как это позволяет группе планировать состав на разборе.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">10</span>
+            <span class="rule-title">Пунктуальность</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>На встречи-разборы важно приходить вовремя (15 мин тех опоздание), те кто опаздывают — подключаются онлайн по истечении 15 мин. Если опоздание без подключения, то договорились, что участник оплачивает ужин всем.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">11</span>
+            <span class="rule-title">Коллективная ответственность</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Ответственность за исполнение правил лежит на всех участниках, то есть все участники стараются минимизировать нарушения правил группой.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">12</span>
+            <span class="rule-title">Очный формат</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Мастермайнд задуман как очное мероприятие. Посещение встреч онлайн только по уважительной причине, причина озвучивается в чат заранее.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">13</span>
+            <span class="rule-title">Голосование</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Вопросы решаем большинством голосов, право вето у организатора.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">14</span>
+            <span class="rule-title">Публикация отчётов</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Для сохранения общего контекста группы, обязуюсь писать отчёт о прошедшей неделе до 23:59 понедельника. Отчёты включают результаты недели, в бизнесе и/или личные, пульс группы. При нарушении участник на следующую встречу приносит угощение всем участникам.</p>
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="rule-number">15</span>
+            <span class="rule-title">Личные отношения</span>
+            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <div class="rule-content">
+            <p>Запрещается вступать в личные интимные отношения с участниками группы, а также в долевые бизнес-партнёрства. Дружба не запрещена. Оказание услуг не запрещено.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="mm-footer">
-    <p>Создано с ❤️ для сообщества</p>
-    <p>© 2025 Мастермайнд. Все права защищены.</p>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-text">
+          <span>Создано с</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <span>для сообщества</span>
+        </div>
+        <p class="footer-copyright">© 2025 Мастермайнд. Все права защищены.</p>
+      </div>
+    </div>
   </footer>
-
-</div>
-
 </body>
 </html>
