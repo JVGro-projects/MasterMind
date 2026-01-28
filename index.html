@@ -3,264 +3,434 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мастермайнд — Ценности и правила</title>
+  <title>Мастермайнд — Бизнес-сообщество</title>
   <meta name="description" content="Пространство для роста, поддержки и созидания. Ценности и правила бизнес-сообщества Мастермайнд.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    
+
     :root {
-      --color-bg: #FAF9F6;
-      --color-bg-secondary: #F5F3EF;
-      --color-text: #1a1a1a;
-      --color-text-muted: #6b6b6b;
-      --color-primary: #2d5a4a;
-      --color-primary-light: rgba(45, 90, 74, 0.1);
-      --color-accent: #c9a86c;
-      --color-border: rgba(0, 0, 0, 0.08);
-      --color-card: #ffffff;
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.04);
-      --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.08);
-      --radius: 16px;
+      --background: 45 40% 96%;
+      --foreground: 150 30% 15%;
+      --card: 45 30% 99%;
+      --card-foreground: 150 30% 15%;
+      --primary: 160 70% 40%;
+      --primary-foreground: 45 40% 98%;
+      --secondary: 150 25% 90%;
+      --secondary-foreground: 160 50% 25%;
+      --muted: 45 15% 88%;
+      --muted-foreground: 150 10% 40%;
+      --accent: 35 90% 55%;
+      --accent-foreground: 45 40% 98%;
+      --border: 45 20% 85%;
+      --radius: 1rem;
     }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
+
     body {
-      font-family: var(--font-body);
-      background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
-      color: var(--color-text);
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
       line-height: 1.6;
-      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 20% 20%, hsl(160 70% 40% / 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 10%, hsl(35 90% 55% / 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 10% 60%, hsl(170 60% 45% / 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 90% 70%, hsl(160 70% 40% / 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, hsl(35 90% 55% / 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
     }
-    
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 1.5rem;
     }
-    
+
+    /* Background Pattern */
+    .background-pattern {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .background-pattern svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .grid-pattern { opacity: 0.04; }
+    .diagonal-pattern { opacity: 0.02; }
+
+    .geo-shape {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid hsl(160 70% 40% / 0.1);
+    }
+
+    .geo-square {
+      border-radius: 0;
+    }
+
+    .gradient-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+
+    /* Animations */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25%); }
+    }
+
+    .animate-fade-up {
+      animation: fade-up 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .animate-bounce { animation: bounce 1s infinite; }
+
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+
     /* Hero Section */
     .hero {
-      min-height: 60vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
-      padding: 80px 0;
     }
-    
-    .hero::before {
-      content: '';
+
+    .hero-bg {
       position: absolute;
-      top: 80px;
-      left: 40px;
-      width: 300px;
-      height: 300px;
-      background: var(--color-primary-light);
-      border-radius: 50%;
-      filter: blur(80px);
+      inset: 0;
+      background: linear-gradient(to bottom right, hsl(var(--background)), hsl(var(--background)), hsl(var(--secondary) / 0.3));
     }
-    
-    .hero::after {
-      content: '';
+
+    .hero-shape {
       position: absolute;
-      bottom: 40px;
-      right: 40px;
-      width: 400px;
-      height: 400px;
-      background: rgba(201, 168, 108, 0.1);
       border-radius: 50%;
-      filter: blur(80px);
+      opacity: 0.6;
     }
-    
+
+    .hero-blur {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+
     .hero-content {
-      text-align: center;
       position: relative;
-      z-index: 1;
-      max-width: 800px;
+      z-index: 10;
+      text-align: center;
+      max-width: 56rem;
+      padding: 5rem 1.5rem;
     }
-    
-    .hero-badge {
+
+    .badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--color-primary-light);
-      color: var(--color-primary);
-      border-radius: 100px;
-      font-size: 14px;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      border-radius: 9999px;
+      background: hsl(var(--primary) / 0.1);
+      color: hsl(var(--primary));
+      font-size: 0.875rem;
       font-weight: 500;
-      margin-bottom: 32px;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.05);
+      backdrop-filter: blur(4px);
+      border: 1px solid hsl(var(--primary) / 0.1);
     }
-    
-    .hero-badge svg {
-      width: 16px;
-      height: 16px;
-    }
-    
+
     .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(48px, 8vw, 80px);
+      font-size: clamp(3rem, 8vw, 6rem);
       font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      text-wrap: balance;
     }
-    
-    .hero p {
-      font-size: clamp(18px, 2.5vw, 24px);
-      color: var(--color-text-muted);
-      max-width: 600px;
+
+    .hero h1 span {
+      background: linear-gradient(to right, hsl(var(--foreground)), hsl(var(--foreground)), hsl(var(--primary)));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+      color: hsl(var(--muted-foreground));
+      max-width: 42rem;
       margin: 0 auto;
-      line-height: 1.7;
+      line-height: 1.75;
     }
-    
-    .hero p .highlight {
-      color: var(--color-primary);
+
+    .hero-subtitle .highlight {
+      color: hsl(var(--primary));
       font-weight: 500;
+      display: block;
+      margin-top: 0.5rem;
     }
-    
+
     .hero-divider {
+      margin-top: 4rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      margin-top: 48px;
+      gap: 1rem;
     }
-    
-    .hero-divider-line {
-      width: 64px;
+
+    .hero-divider .line {
+      width: 5rem;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--color-primary));
+      background: linear-gradient(to right, transparent, hsl(var(--primary) / 0.5), hsl(var(--primary)));
     }
-    
-    .hero-divider-line:last-child {
-      background: linear-gradient(90deg, var(--color-primary), transparent);
+
+    .hero-divider .line:last-child {
+      background: linear-gradient(to left, transparent, hsl(var(--primary) / 0.5), hsl(var(--primary)));
     }
-    
-    .hero-divider-dot {
-      width: 8px;
-      height: 8px;
+
+    .hero-divider .dot {
+      width: 0.75rem;
+      height: 0.75rem;
       border-radius: 50%;
-      background: var(--color-accent);
+      background: hsl(var(--accent));
+      box-shadow: 0 0 20px hsl(var(--accent) / 0.5);
     }
-    
+
+    .scroll-btn {
+      margin-top: 3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: hsl(var(--muted-foreground));
+      transition: color 0.3s;
+    }
+
+    .scroll-btn:hover {
+      color: hsl(var(--primary));
+    }
+
+    .scroll-btn span {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
     /* Values Section */
     .values {
-      padding: 96px 0;
+      padding: 8rem 0;
+      position: relative;
+      overflow: hidden;
     }
-    
+
     .section-header {
+      max-width: 42rem;
+      margin: 0 auto 5rem;
       text-align: center;
-      max-width: 600px;
-      margin: 0 auto 64px;
     }
-    
-    .section-label {
-      font-size: 14px;
+
+    .section-tag {
+      display: inline-block;
+      color: hsl(var(--primary));
       font-weight: 500;
-      color: var(--color-primary);
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
+      margin-bottom: 1rem;
+      padding: 0.375rem 1rem;
+      background: hsl(var(--primary) / 0.1);
+      border-radius: 9999px;
     }
-    
+
     .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 5vw, 48px);
+      font-size: clamp(2rem, 5vw, 3.75rem);
       font-weight: 600;
-      color: var(--color-text);
+      color: hsl(var(--foreground));
+      margin-top: 1rem;
     }
-    
+
+    .section-divider {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .section-divider .line {
+      width: 3rem;
+      height: 2px;
+      background: linear-gradient(to right, transparent, hsl(var(--primary) / 0.5));
+    }
+
+    .section-divider .line:last-child {
+      background: linear-gradient(to left, transparent, hsl(var(--primary) / 0.5));
+    }
+
+    .section-divider .dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background: hsl(var(--accent));
+    }
+
     .values-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-      max-width: 1100px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 72rem;
       margin: 0 auto;
     }
-    
+
     .value-card {
-      background: var(--color-card);
-      padding: 32px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--color-border);
       position: relative;
-      transition: all 0.4s ease;
+      background: hsl(var(--card));
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid hsl(var(--border) / 0.5);
+      box-shadow: 0 4px 20px -4px hsl(150 30% 20% / 0.08);
+      overflow: hidden;
+      transition: all 0.5s;
+      opacity: 0;
+      transform: translateY(2rem);
     }
-    
+
+    .value-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .value-card:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-4px);
+      box-shadow: 0 8px 32px -8px hsl(150 30% 20% / 0.12);
     }
-    
+
     .value-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 32px;
-      right: 32px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(45, 90, 74, 0.3), transparent);
+      inset: 0;
+      background: linear-gradient(to bottom right, hsl(var(--primary) / 0.05), transparent, hsl(var(--accent) / 0.05));
+      opacity: 0;
+      transition: opacity 0.5s;
     }
-    
+
+    .value-card:hover::before {
+      opacity: 1;
+    }
+
+    .value-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 2rem;
+      right: 2rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, hsl(var(--primary) / 0.3), transparent);
+      transition: all 0.5s;
+    }
+
+    .value-card:hover::after {
+      background: linear-gradient(to right, transparent, hsl(var(--primary) / 0.6), transparent);
+    }
+
     .value-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      background: var(--color-primary-light);
-      color: var(--color-primary);
-      display: flex;
+      position: relative;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 24px;
-      transition: all 0.3s ease;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1rem;
+      background: hsl(var(--primary) / 0.1);
+      color: hsl(var(--primary));
+      margin-bottom: 1.5rem;
+      transition: all 0.5s;
+      box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.1);
     }
-    
+
     .value-card:hover .value-icon {
-      background: var(--color-primary);
-      color: white;
+      background: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+      transform: scale(1.1) rotate(3deg);
     }
-    
+
     .value-icon svg {
-      width: 24px;
-      height: 24px;
+      width: 1.75rem;
+      height: 1.75rem;
     }
-    
+
     .value-card h3 {
-      font-family: var(--font-display);
-      font-size: 24px;
+      position: relative;
+      font-size: 1.5rem;
       font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 12px;
+      color: hsl(var(--foreground));
+      margin-bottom: 1rem;
+      transition: color 0.3s;
     }
-    
+
+    .value-card:hover h3 {
+      color: hsl(var(--primary));
+    }
+
     .value-card p {
-      font-size: 15px;
-      color: var(--color-text-muted);
+      position: relative;
+      color: hsl(var(--muted-foreground));
+      font-size: 0.9375rem;
       line-height: 1.7;
     }
-    
+
+    .value-card .bottom-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s;
+    }
+
+    .value-card:hover .bottom-line {
+      transform: scaleX(1);
+    }
+
     /* Rules Section */
     .rules {
-      padding: 96px 0;
-      background: var(--color-bg-secondary);
+      padding: 8rem 0;
+      background: linear-gradient(to bottom, hsl(var(--secondary) / 0.3), hsl(var(--secondary) / 0.5), hsl(var(--secondary) / 0.3));
       position: relative;
+      overflow: hidden;
     }
-    
+
     .rules::before {
       content: '';
       position: absolute;
@@ -268,216 +438,372 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+      background: linear-gradient(to right, transparent, hsl(var(--border)), transparent);
     }
-    
-    .section-description {
-      font-size: 16px;
-      color: var(--color-text-muted);
-      margin-top: 16px;
-      line-height: 1.7;
+
+    .rules-intro {
+      color: hsl(var(--muted-foreground));
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      max-width: 36rem;
+      margin-left: auto;
+      margin-right: auto;
     }
-    
-    .rules-container {
-      max-width: 800px;
+
+    .rules-card {
+      max-width: 48rem;
       margin: 0 auto;
-      background: var(--color-card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-soft);
-      padding: 32px;
+      background: hsl(var(--card));
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 50px -12px hsl(0 0% 0% / 0.05);
+      padding: 2rem 2.5rem;
+      border: 1px solid hsl(var(--border) / 0.5);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(2rem);
+      transition: all 0.7s 0.2s;
     }
-    
+
+    .rules-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rules-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+    }
+
     .rule-item {
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid hsl(var(--border) / 0.5);
     }
-    
+
     .rule-item:last-child {
       border-bottom: none;
     }
-    
+
     .rule-header {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 20px 0;
+      gap: 1.25rem;
+      padding: 1.5rem 0;
       cursor: pointer;
-      transition: all 0.3s ease;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
     }
-    
-    .rule-header:hover .rule-number {
-      background: var(--color-primary);
-      color: white;
-    }
-    
+
     .rule-number {
       flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--color-primary-light);
-      color: var(--color-primary);
-      font-family: var(--font-display);
-      font-size: 18px;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.75rem;
+      background: linear-gradient(to bottom right, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.05));
+      color: hsl(var(--primary));
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.125rem;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px -1px hsl(var(--primary) / 0.1);
     }
-    
+
+    .rule-header:hover .rule-number {
+      background: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.2);
+    }
+
     .rule-title {
-      font-family: var(--font-display);
-      font-size: 18px;
+      flex: 1;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.125rem;
       font-weight: 500;
-      color: var(--color-text);
-      flex-grow: 1;
+      color: hsl(var(--foreground));
+      transition: color 0.3s;
     }
-    
-    .rule-toggle {
-      width: 24px;
-      height: 24px;
-      color: var(--color-text-muted);
-      transition: transform 0.3s ease;
+
+    .rule-header:hover .rule-title {
+      color: hsl(var(--primary));
     }
-    
-    .rule-item.open .rule-toggle {
+
+    .rule-chevron {
+      color: hsl(var(--muted-foreground));
+      transition: transform 0.3s;
+    }
+
+    .rule-item.open .rule-chevron {
       transform: rotate(180deg);
     }
-    
+
     .rule-content {
-      display: none;
-      padding: 0 0 20px 56px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
     }
-    
+
     .rule-item.open .rule-content {
-      display: block;
+      max-height: 500px;
     }
-    
-    .rule-content p {
-      font-size: 15px;
-      color: var(--color-text-muted);
+
+    .rule-description {
+      padding: 0 0 1.5rem 4.25rem;
+      position: relative;
+    }
+
+    .rule-description::before {
+      content: '';
+      position: absolute;
+      left: 1.25rem;
+      top: 0;
+      bottom: 1.5rem;
+      width: 2px;
+      background: linear-gradient(to bottom, hsl(var(--primary) / 0.3), hsl(var(--primary) / 0.1), transparent);
+    }
+
+    .rule-description p {
+      color: hsl(var(--muted-foreground));
+      font-size: 0.9375rem;
       line-height: 1.7;
     }
-    
+
     /* Footer */
     .footer {
-      padding: 48px 0;
-      border-top: 1px solid var(--color-border);
-      text-align: center;
+      padding: 4rem 0;
+      border-top: 1px solid hsl(var(--border) / 0.5);
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, hsl(var(--secondary) / 0.2), transparent);
+    }
+
     .footer-content {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 1.5rem;
+      text-align: center;
     }
-    
-    .footer-text {
+
+    .footer-logo {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: var(--color-text-muted);
+      gap: 0.5rem;
+      color: hsl(var(--primary));
     }
-    
-    .footer-text svg {
-      width: 16px;
-      height: 16px;
-      color: var(--color-accent);
-      fill: var(--color-accent);
+
+    .footer-logo span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
     }
-    
-    .footer-copyright {
-      font-size: 12px;
-      color: var(--color-text-muted);
-      opacity: 0.6;
+
+    .footer-heart {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: hsl(var(--muted-foreground));
+      font-size: 0.875rem;
     }
-    
-    @media (max-width: 768px) {
+
+    .footer-heart svg {
+      color: hsl(var(--accent));
+      fill: hsl(var(--accent));
+    }
+
+    .footer-copy {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      color: hsl(var(--muted-foreground) / 0.6);
+    }
+
+    .footer-copy .line {
+      width: 2rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, hsl(var(--border)));
+    }
+
+    .footer-copy .line:last-child {
+      background: linear-gradient(to left, transparent, hsl(var(--border)));
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
       .values-grid {
         grid-template-columns: 1fr;
       }
       
-      .rules-container {
-        padding: 24px;
+      .rules-card {
+        padding: 1.5rem;
       }
       
-      .rule-content {
+      .rule-description {
         padding-left: 0;
+      }
+      
+      .rule-description::before {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
+  <!-- Background Pattern -->
+  <div class="background-pattern">
+    <svg class="grid-pattern" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="smallGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </pattern>
+        <pattern id="largeGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+          <rect width="120" height="120" fill="url(#smallGrid)"/>
+          <path d="M 120 0 L 0 0 0 120" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#largeGrid)" />
+    </svg>
+    <svg class="diagonal-pattern" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="diagonals" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 0 60 L 60 0" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#diagonals)" />
+    </svg>
+    <div class="geo-shape" style="top:5%;left:8%;width:10rem;height:10rem;border-color:hsl(160 70% 40%/0.1);"></div>
+    <div class="geo-shape geo-square" style="top:15%;right:12%;width:6rem;height:6rem;border-color:hsl(35 90% 55%/0.15);transform:rotate(45deg);"></div>
+    <div class="geo-shape" style="top:35%;left:3%;width:8rem;height:8rem;border-width:2px;border-color:hsl(160 70% 40%/0.08);"></div>
+    <div class="geo-shape" style="top:45%;right:5%;width:12rem;height:12rem;border-color:hsl(35 90% 55%/0.1);"></div>
+    <div class="geo-shape geo-square" style="top:55%;left:15%;width:5rem;height:5rem;border-color:hsl(160 70% 40%/0.12);transform:rotate(45deg);"></div>
+    <div class="geo-shape" style="top:65%;right:18%;width:9rem;height:9rem;border-color:hsl(160 70% 40%/0.08);"></div>
+    <div class="gradient-blob" style="top:10%;left:20%;width:500px;height:500px;background:hsl(160 70% 40%/0.05);"></div>
+    <div class="gradient-blob" style="top:40%;right:10%;width:400px;height:400px;background:hsl(35 90% 55%/0.08);"></div>
+    <div class="gradient-blob" style="top:70%;left:30%;width:450px;height:450px;background:hsl(150 25% 90%/0.2);"></div>
+  </div>
+
   <!-- Hero Section -->
   <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-          <span>Бизнес-сообщество</span>
-        </div>
-        <h1>Мастермайнд</h1>
-        <p>Пространство для роста, поддержки и созидания. <span class="highlight">Ценности и правила</span>, которые объединяют нас.</p>
-        <div class="hero-divider">
-          <div class="hero-divider-line"></div>
-          <div class="hero-divider-dot"></div>
-          <div class="hero-divider-line"></div>
-        </div>
+    <div class="hero-bg"></div>
+    <div class="hero-shape" style="top:5rem;right:10%;width:16rem;height:16rem;border:2px solid hsl(160 70% 40%/0.2);"></div>
+    <div class="hero-shape" style="bottom:8rem;left:5%;width:12rem;height:12rem;border:1px solid hsl(35 90% 55%/0.3);"></div>
+    <div class="hero-shape geo-square" style="top:40%;right:20%;width:8rem;height:8rem;border:1px solid hsl(160 70% 40%/0.15);transform:rotate(45deg);"></div>
+    <div class="hero-blur" style="top:5rem;left:2.5rem;width:18rem;height:18rem;background:hsl(160 70% 40%/0.1);"></div>
+    <div class="hero-blur" style="bottom:5rem;right:2.5rem;width:24rem;height:24rem;background:hsl(35 90% 55%/0.2);"></div>
+    <div class="hero-blur" style="top:50%;left:33%;width:16rem;height:16rem;background:hsl(150 25% 90%/0.3);"></div>
+    
+    <div class="hero-content">
+      <div class="badge animate-fade-up">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+        <span>Бизнес-сообщество</span>
       </div>
+      
+      <h1 class="animate-fade-up delay-100">
+        <span>Мастермайнд</span>
+      </h1>
+      
+      <p class="hero-subtitle animate-fade-up delay-200">
+        Пространство для роста, поддержки и созидания.
+        <span class="highlight">Ценности и правила, которые объединяют нас.</span>
+      </p>
+      
+      <div class="hero-divider animate-fade-up delay-300">
+        <div class="line"></div>
+        <div class="dot animate-pulse"></div>
+        <div class="line"></div>
+      </div>
+      
+      <button class="scroll-btn animate-fade-up delay-400" onclick="document.getElementById('values').scrollIntoView({behavior:'smooth'})">
+        <span>Узнать больше</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-bounce"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
     </div>
   </section>
 
   <!-- Values Section -->
-  <section class="values">
+  <section class="values" id="values">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">Что нас объединяет</div>
+        <span class="section-tag">Что нас объединяет</span>
         <h2 class="section-title">Наши ценности</h2>
+        <div class="section-divider">
+          <div class="line"></div>
+          <div class="dot"></div>
+          <div class="line"></div>
+        </div>
       </div>
+      
       <div class="values-grid">
         <div class="value-card">
           <div class="value-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
           </div>
           <h3>Экологичный бизнес</h3>
           <p>Нам важен экологичный бизнес, поэтому мы не рассматриваем бизнесы, построенные на темах, схемах и коррупции. Мы ценим ниши и бизнесы, которые что-то полезное создают в мире.</p>
+          <div class="bottom-line"></div>
         </div>
+        
         <div class="value-card">
           <div class="value-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
           </div>
           <h3>Развитие</h3>
           <p>Нам важно развитие. Поэтому мы рассматриваем участников, заинтересованных в развитии. А также обязуемся рассматривать каждого участника как неслучайного, каждое эмоциональное событие как вероятно важное для себя — т.е. брать 1%+ ответственности за всё происходящее в программе. Воспринимать людей как зеркала. Проявлять открытость, т.е. готовность принимать идеи и обратную связь участников программы (не обязательно при этом их 100% реализовывать).</p>
+          <div class="bottom-line"></div>
         </div>
+        
         <div class="value-card">
           <div class="value-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
           </div>
           <h3>Глубина</h3>
           <p>Нам важна глубина. Поэтому мы поддерживаем открытость и искренность свою и других участников, а также сообщаем группе о том, что этому может препятствовать.</p>
+          <div class="bottom-line"></div>
         </div>
+        
         <div class="value-card">
           <div class="value-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
           </div>
           <h3>Мягкая и поддерживающая среда</h3>
           <p>Нам важна мягкая и поддерживающая среда. Поэтому мы следим за форматом, в котором даём обратную связь и коммуницируем с другими участниками. Также у нас существует правило СТОП: каждый участник может сигнализировать в процессе общения или обратной связи, что коммуникация его ранит и её необходимо прекратить.</p>
+          <div class="bottom-line"></div>
         </div>
+        
         <div class="value-card">
           <div class="value-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>
           </div>
           <h3>Созидание</h3>
           <p>Нам важно созидание. А значит мы ценим и поддерживаем активность и вклад других участников, а также не поддерживаем участие тех, кто пришёл только получать.</p>
+          <div class="bottom-line"></div>
         </div>
+        
         <div class="value-card">
           <div class="value-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" x2="2" y1="8" y2="22"/><line x1="17.5" x2="9" y1="15" y2="15"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>
           </div>
           <h3>Лёгкость</h3>
           <p>Мы ценим лёгкость. Если мы можем облегчить какой-то процесс, то мы делаем его легче.</p>
+          <div class="bottom-line"></div>
         </div>
       </div>
     </div>
@@ -487,159 +813,204 @@
   <section class="rules">
     <div class="container">
       <div class="section-header">
-        <div class="section-label">Обязательства участников</div>
+        <span class="section-tag">Обязательства участников</span>
         <h2 class="section-title">Правила мастермайнда</h2>
-        <p class="section-description">Присоединяясь к данной программе, каждый участник подтверждает своё намерение соблюдать правила Мастермайнда и помогать в их соблюдении другим участникам.</p>
+        <p class="rules-intro">Присоединяясь к данной программе, каждый участник подтверждает своё намерение соблюдать правила и помогать в их соблюдении другим.</p>
       </div>
-      <div class="rules-container">
+      
+      <div class="rules-card">
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">1</span>
             <span class="rule-title">Набор новых участников</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Любой из участников выносит кандидатуру нового участника, кандидат проходит адмиссию с организатором, и в случае успеха проходит адмиссию у группы, после этого участнику назначается разбор 360. Решение о приёме принимается 100% голосов.</p>
+            <div class="rule-description">
+              <p>Любой из участников выносит кандидатуру нового участника, кандидат проходит адмиссию с организатором, и в случае успеха проходит адмиссию у группы, после этого участнику назначается разбор 360. Решение о приёме принимается 100% голосов.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">2</span>
             <span class="rule-title">Разборы</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Разборы проводятся в соответствии с очерёдностью. Задача группы несмотря на наличие запроса, выяснить истинный запрос участника и в этой связи, часто разборы идут не по сценарию. Если у участника нет запроса, то он приходит на разбор 360. По итогам разбора в течение 24 часов участник пишет рефлексию в группу. На полученную рефлексию участники могут давать обратную связь, если видят разницу с информацией полученной на разборе. Новый участник включается в график дополнительным разбором к плановому.</p>
+            <div class="rule-description">
+              <p>Разборы проводятся в соответствии с очерёдностью. Задача группы несмотря на наличие запроса, выяснить истинный запрос участника и в этой связи, часто разборы идут не по сценарию. Если у участника нет запроса, то он приходит на разбор 360. По итогам разбора в течение 24 часов участник пишет рефлексию в группу. На полученную рефлексию участники могут давать обратную связь, если видят разницу с информацией полученной на разборе. Новый участник включается в график дополнительным разбором к плановому.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">3</span>
             <span class="rule-title">Механизм разрешения конфликтов</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Участник берёт на себя обязательство повышать свой уровень доверия, в т.ч. проговаривать в течение недели все «внутренние разговоры» к другим участникам программы. Если разговор не приводит к снятию напряжения, то любой из участников может вынести tension на группу. Группа даёт обратную связь и каждому из участников может быть вынесен список корректирующей обратной связи. Если это не сработало, любой участник может вынести запрос об отчислении. Решение об отчислении принимается большинством голосов.</p>
+            <div class="rule-description">
+              <p>Участник берёт на себя обязательство повышать свой уровень доверия, в т.ч. проговаривать в течение недели все «внутренние разговоры» к другим участникам программы. Если разговор не приводит к снятию напряжения, то любой из участников может вынести tension на группу. Группа даёт обратную связь и каждому из участников может быть вынесен список корректирующей обратной связи. Если это не сработало, любой участник может вынести запрос об отчислении. Решение об отчислении принимается большинством голосов.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">4</span>
             <span class="rule-title">Регламент выхода участника</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Участник озвучивает желание и причину выхода, приходит на завершающую встречу. Если выход без разбора, то выход считается нештатным и дальнейший вход в ММ будет закрыт.</p>
+            <div class="rule-description">
+              <p>Участник озвучивает желание и причину выхода, приходит на завершающую встречу. Если выход без разбора, то выход считается нештатным и дальнейший вход в ММ будет закрыт.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">5</span>
             <span class="rule-title">Депозиты и взносы</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Депозит, внесённый на совместный выезд не возвращается, в случае отказа от выезда, поскольку решение уже принято и затрагивает всех участников. Взнос за участие в Мастермайнде является невозвратным.</p>
+            <div class="rule-description">
+              <p>Депозит, внесённый на совместный выезд не возвращается, в случае отказа от выезда, поскольку решение уже принято и затрагивает всех участников. Взнос за участие в Мастермайнде является невозвратным.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">6</span>
             <span class="rule-title">Конфиденциальность</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>На 100% соблюдать конфиденциальность всей информации, которая обсуждается в группе. Нарушение ведёт к прекращению участия.</p>
+            <div class="rule-description">
+              <p>На 100% соблюдать конфиденциальность всей информации, которая обсуждается в группе. Нарушение ведёт к прекращению участия.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">7</span>
             <span class="rule-title">Регулярность встреч</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Встречаться раз в две недели или каждую неделю. Встречи-разборы 1 раз в две недели.</p>
+            <div class="rule-description">
+              <p>Встречаться раз в две недели или каждую неделю. Встречи-разборы 1 раз в две недели.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">8</span>
             <span class="rule-title">Формат встреч</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Встречи проходят оффлайн с 17 до 21 (всё время Мск), по вторникам, возможны переносы по решению большинства. Пропуск любой части разбора засчитывается, как пропуск обязательной встречи.</p>
+            <div class="rule-description">
+              <p>Встречи проходят оффлайн с 17 до 21 (всё время Мск), по вторникам, возможны переносы по решению большинства. Пропуск любой части разбора засчитывается, как пропуск обязательной встречи.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">9</span>
             <span class="rule-title">Допустимые пропуски</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>За период возможно два пропуска разборов. Также договорились, что за 2026 календарный год, каждый участник имеет право на отпуск в количестве 2 пропусков обязательных встреч. Больше — участник исключается. Участник предупреждает о своих пропусках официальных встреч сразу как узнаёт, так как это позволяет группе планировать состав на разборе.</p>
+            <div class="rule-description">
+              <p>За период возможно два пропуска разборов. Также договорились, что за 2026 календарный год, каждый участник имеет право на отпуск в количестве 2 пропусков обязательных встреч. Больше — участник исключается. Участник предупреждает о своих пропусках официальных встреч сразу как узнаёт, так как это позволяет группе планировать состав на разборе.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">10</span>
             <span class="rule-title">Пунктуальность</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>На встречи-разборы важно приходить вовремя (15 мин тех опоздание), те кто опаздывают — подключаются онлайн по истечении 15 мин. Если опоздание без подключения, то договорились, что участник оплачивает ужин всем.</p>
+            <div class="rule-description">
+              <p>На встречи-разборы важно приходить вовремя (15 мин тех опоздание), те кто опаздывают — подключаются онлайн по истечении 15 мин. Если опоздание без подключения, то договорились, что участник оплачивает ужин всем.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">11</span>
             <span class="rule-title">Коллективная ответственность</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Ответственность за исполнение правил лежит на всех участниках, то есть все участники стараются минимизировать нарушения правил группой.</p>
+            <div class="rule-description">
+              <p>Ответственность за исполнение правил лежит на всех участниках, то есть все участники стараются минимизировать нарушения правил группой.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">12</span>
             <span class="rule-title">Очный формат</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Мастермайнд задуман как очное мероприятие. Посещение встреч онлайн только по уважительной причине, причина озвучивается в чат заранее.</p>
+            <div class="rule-description">
+              <p>Мастермайнд задуман как очное мероприятие. Посещение встреч онлайн только по уважительной причине, причина озвучивается в чат заранее.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">13</span>
             <span class="rule-title">Голосование</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Вопросы решаем большинством голосов, право вето у организатора.</p>
+            <div class="rule-description">
+              <p>Вопросы решаем большинством голосов, право вето у организатора.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">14</span>
             <span class="rule-title">Публикация отчётов</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Для сохранения общего контекста группы, обязуюсь писать отчёт о прошедшей неделе до 23:59 понедельника. Отчёты включают результаты недели, в бизнесе и/или личные, пульс группы. При нарушении участник на следующую встречу приносит угощение всем участникам.</p>
+            <div class="rule-description">
+              <p>Для сохранения общего контекста группы, обязуюсь писать отчёт о прошедшей неделе до 23:59 понедельника. Отчёты включают результаты недели, в бизнесе и/или личные, пульс группы. При нарушении участник на следующую встречу приносит угощение всем участникам.</p>
+            </div>
           </div>
         </div>
+        
         <div class="rule-item">
-          <div class="rule-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="rule-header" onclick="toggleRule(this)">
             <span class="rule-number">15</span>
             <span class="rule-title">Личные отношения</span>
-            <svg class="rule-toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
+            <svg class="rule-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
           <div class="rule-content">
-            <p>Запрещается вступать в личные интимные отношения с участниками группы, а также в долевые бизнес-партнёрства. Дружба не запрещена. Оказание услуг не запрещено.</p>
+            <div class="rule-description">
+              <p>Запрещается вступать в личные интимные отношения с участниками группы, а также в долевые бизнес-партнёрства. Дружба не запрещена. Оказание услуг не запрещено.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -650,14 +1021,45 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-text">
+        <div class="footer-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          <span>Мастермайнд</span>
+        </div>
+        <div class="footer-heart">
           <span>Создано с</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
           <span>для сообщества</span>
         </div>
-        <p class="footer-copyright">© 2025 Мастермайнд. Все права защищены.</p>
+        <div class="footer-copy">
+          <div class="line"></div>
+          <p>© 2025 Мастермайнд. Все права защищены.</p>
+          <div class="line"></div>
+        </div>
       </div>
     </div>
   </footer>
+
+  <script>
+    function toggleRule(button) {
+      const item = button.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.rule-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.value-card, .rules-card').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
